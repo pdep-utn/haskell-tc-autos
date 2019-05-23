@@ -50,18 +50,21 @@ tablaDePosiciones :: [Carrera] -> [Posicion]
 tablaDePosiciones carreras = (sortCorredores . map (\corredor -> (corredor, puntosObtenidos corredor carreras))) corredores
 
 puntosObtenidos :: Corredor -> [Carrera] -> Puntos
-puntosObtenidos corredor = foldr ((+) . findPuntos corredor) 0
+puntosObtenidos corredor = foldr ((+) . puntosDeCorredor corredor) 0
 --puntosObtenidos corredor = foldl (\acum carrera -> acum + (findPuntos corredor) carrera) 0.0
 
 corredor :: Posicion -> Corredor
 corredor = fst
 
-findPuntos :: Corredor -> Carrera -> Puntos
-findPuntos unCorredor = headOrZero . filter ((== unCorredor) . corredor) . posiciones
+puntos :: Posicion -> Puntos
+puntos = snd
 
-headOrZero :: [Posicion] -> Puntos
-headOrZero [posicion] = snd posicion
-headOrZero []         = 0
+puntosDeCorredor :: Corredor -> Carrera -> Puntos
+puntosDeCorredor unCorredor = primerElemento . filter ((== unCorredor) . corredor) . posiciones
+
+primerElemento :: [Posicion] -> Puntos
+primerElemento ((_, puntos):_) = puntos
+primerElemento []         = 0
 
 sortCorredores :: [Posicion] -> [Posicion]
 sortCorredores = foldl ordenarCorredor []
@@ -69,14 +72,6 @@ sortCorredores = foldl ordenarCorredor []
 ordenarCorredor :: [Posicion] -> Posicion -> [Posicion]
 ordenarCorredor [] posicion = [posicion]
 ordenarCorredor (posicion1:posiciones) posicion
-    | (snd posicion1 < snd posicion) = (posicion:posicion1:posiciones)
-    | otherwise                      = posicion1:ordenarCorredor posiciones posicion
+    | (puntos posicion > puntos posicion1) = (posicion:posicion1:posiciones)
+    | otherwise                            = posicion1:ordenarCorredor posiciones posicion
 
-
--- Función 1
---f :: Ord t => (b -> Int) -> (Int -> b) -> Int -> t -> [t] -> Int
-f a b c d (r:rs)
-   | r > d      = (a . b) c
-   | otherwise  = c * length rs
-
-data Nota = Insuficiente | Regular | Aprobado | Sobresaliente deriving (Eq, Ord, Show, Enum)

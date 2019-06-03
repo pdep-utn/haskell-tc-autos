@@ -46,7 +46,7 @@ carreras = [
 
 ```haskell
 tablaDePosiciones carreras
-
+[("Urcera",86.0),("Ardusso",83.5),("Werner",77.5),("Aguirre",47.0),("Rossi",47.0),("Benvenuti",45.0),("Mangoni",45.0),("Ortelli",42.0),("De Benedictis",42.0),("Ponce de Le\243n",42.0),("Mazzacane",39.0),("Ledesma",38.5)]
 ```
 
 ## Instrucciones para descargarse el ejemplo
@@ -63,7 +63,6 @@ Allí podrán pedir la tabla de posiciones de los corredores de la siguiente man
 
 ```hs
 tablaDePosiciones carreras
-[("Urcera",86.0),("Ardusso",83.5),("Werner",77.5),("Aguirre",47.0),("Rossi",47.0),("Benvenuti",45.0),("Mangoni",45.0),("Ortelli",42.0),("De Benedictis",42.0),("Ponce de Le\243n",42.0),("Mazzacane",39.0),("Ledesma",38.5)]
 ```
 
 También pueden ejecutar los tests unitarios, una vez ejecutados los dos comandos `stack build`:

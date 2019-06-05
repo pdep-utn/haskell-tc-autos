@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/pdep-utn/haskell-tc-autos.svg?branch=master)](https://travis-ci.org/pdep-utn/haskell-tc-autos)
 
+## Instalación del entorno
+
+Para instalar y ejecutar este ejemplo sigan [estas instrucciones](https://github.com/pdep-utn/enunciados-miercoles-noche/blob/master/pages/haskell/entorno.md)
+
 ## Objetivo
 
 Dada la siguiente información de las carreras de TC disputadas en el año...

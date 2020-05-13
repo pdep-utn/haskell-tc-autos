@@ -3,12 +3,12 @@ import PdePreludat
 
 -- Dada la siguiente información de las carreras de TC disputadas en el año...
 type Corredor = String
-type Puntos = Float
+type Puntos = Number
 type Posicion = (Corredor, Puntos)
 
 data Carrera = Carrera {
     lugar :: String,
-    fecha :: (Int, Int),
+    fecha :: (Number, Number),
     posiciones :: [Posicion]
 }
 

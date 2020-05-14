@@ -58,7 +58,6 @@ tablaDePosiciones carreras
 Una vez clonado el repo, se paran en la carpeta raíz y ejecutan los siguientes comandos en Git Bash / terminal de Linux:
 
 ```bash
-stack build intero
 stack build
 stack ghci
 ```
@@ -74,3 +73,7 @@ También pueden ejecutar los tests unitarios, una vez ejecutados los dos comando
 ```bash
 stack test
 ```
+
+## Diapositivas para explicar el ejercicio
+
+Pueden ver [aquí](https://docs.google.com/presentation/d/1M1D-v42JwRWg7VjuZ2D0r10lhQ88aX6QhUJ0eBVxHBs/edit#slide=id.g77eff50ac3_0_156) la explicación didáctica que guía el ejemplo.

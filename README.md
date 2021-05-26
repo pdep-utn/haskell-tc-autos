@@ -12,7 +12,7 @@ Dada la siguiente información de las carreras de TC disputadas en el año...
 
 ```haskell
 type Corredor = String
-type Puntos = Float
+type Puntos = Number    -- o Float
 type Posicion = (Corredor, Puntos)
 
 data Carrera = Carrera {

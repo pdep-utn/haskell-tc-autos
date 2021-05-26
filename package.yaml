@@ -1,6 +1,6 @@
-name:                tc-autos
+name:                haskell-tc-autos-nuevo
 version:             0.1.0.0
-github:              "githubuser/tc-autos"
+github:              "githubuser/haskell-tc-autos-nuevo"
 license:             BSD3
 author:              "Author name here"
 maintainer:          "example@example.com"
@@ -17,27 +17,30 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/tc-autos#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/haskell-tc-autos-nuevo#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 - pdeprelude
+- hspec
 
 default-extensions:
   - NoImplicitPrelude
   - FlexibleContexts
+  - RebindableSyntax
 
 library:
   source-dirs: src
+  other-modules: []
 
 tests:
-  tc-autos-test:
-    main:                Spec.hs
+  haskell-tc-autos-nuevo-test:
+    main:                CorrerTests.hs
     source-dirs:         test
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - tc-autos
-    - hspec
+    - haskell-tc-autos-nuevo
+

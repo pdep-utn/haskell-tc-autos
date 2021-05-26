@@ -1,6 +1,6 @@
 # Ejercicio Corredores de TC
 
-[![Build Status](https://travis-ci.org/pdep-utn/haskell-tc-autos.svg?branch=master)](https://travis-ci.org/pdep-utn/haskell-tc-autos)
+[![build](https://github.com/pdep-utn/haskell-tc-autos/actions/workflows/build.yml/badge.svg)](https://github.com/pdep-utn/haskell-tc-autos/actions/workflows/build.yml)
 
 ## Instalación del entorno
 
@@ -12,7 +12,7 @@ Dada la siguiente información de las carreras de TC disputadas en el año...
 
 ```haskell
 type Corredor = String
-type Puntos = Number    -- o Float
+type Puntos = Number    -- o Float si no estás usando el pdepreludat
 type Posicion = (Corredor, Puntos)
 
 data Carrera = Carrera {

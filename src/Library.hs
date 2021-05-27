@@ -53,15 +53,16 @@ carreras = [
 -- *******************************************************************************************************
 -- Tabla de posiciones - función general
 --
-tablaDePosiciones :: [Carrera] -> [Posicion]
-tablaDePosiciones carreras = (sortCorredores . map (\corredor -> (corredor, puntosObtenidos corredor carreras))) corredores
+tablaDePosiciones :: [Carrera] -> [Corredor] -> [Posicion]
+tablaDePosiciones carreras = sortCorredores . map (\corredor -> (corredor, puntosObtenidos corredor carreras))
 
 -- *******************************************************************************************************
 -- Obtener los puntos de un corredor
 --
 puntosObtenidos :: Corredor -> [Carrera] -> Puntos
 puntosObtenidos corredor = foldr ((+) . puntosDeCorredor corredor) 0
---puntosObtenidos corredor = foldl (\acum carrera -> acum + (findPuntos corredor) carrera) 0.0
+-- puntosObtenidos corredor = foldl (\acum carrera -> acum + (findPuntos corredor) carrera) 0.0
+-- puntosObtenidos corredor = foldl (flip ((+) . puntosDeCorredor corredor)) 0
 
 corredor :: Posicion -> Corredor
 corredor = fst
@@ -86,6 +87,8 @@ puntos = snd
 --
 puntosDeCorredor :: Corredor -> Carrera -> Puntos
 puntosDeCorredor unCorredor = puntosPorPosicion . safeHead . filter ((== unCorredor) . corredor) . posiciones
+-- otra opción más simple
+-- puntosDeCorredor unCorredor = sum . map puntos . filter ((== unCorredor) . corredor) . posiciones
 
 -- el head no es seguro (safe), puede devolverte un valor o no, para eso existe el tipo de dato Maybe
 -- que se acompaña de otro tipo. En este caso si la lista es de aes, "maybe" te devuelvo un a, o "maybe not",
@@ -103,12 +106,13 @@ safeHead (x:xs) = Just x
 --
 puntosPorPosicion :: Maybe Posicion -> Number
 puntosPorPosicion Nothing       = 0
-puntosPorPosicion (Just (_, puntos)) = puntos
+puntosPorPosicion (Just posicion) = puntos posicion
 
 -- *******************************************************************************************************
 -- Ordenamiento
 --
 -- alternativa 1 - por burbujeo
+-- explicación copada
 -- https://www.youtube.com/watch?v=nmhjrI-aW5o
 --
 -- sortCorredores :: [Posicion] -> [Posicion]
@@ -117,14 +121,17 @@ puntosPorPosicion (Just (_, puntos)) = puntos
 -- ordenarCorredor :: [Posicion] -> Posicion -> [Posicion]
 -- ordenarCorredor [] posicion = [posicion]
 -- ordenarCorredor (posicion1:posiciones) posicion
---     | (puntos posicion > puntos posicion1) = (posicion:posicion1:posiciones)
---     | otherwise                            = posicion1:ordenarCorredor posiciones posicion
+--     | puntos posicion > puntos posicion1 = (posicion:posicion1:posiciones)
+--     | otherwise                          = posicion1:ordenarCorredor posiciones posicion
 
 
 -- alternativa 2
 -- usar quicksort
+-- explicaciones copadas son
 -- https://www.youtube.com/watch?v=MZaf_9IZCrc
+-- https://www.youtube.com/watch?v=d0V6ibXxI5M
 -- 
+
 sortCorredores :: [Posicion] -> [Posicion]
 sortCorredores []     = []
 sortCorredores (corredor:corredores) = (sortCorredores lesser) ++ [corredor] ++ (sortCorredores greater)

@@ -182,12 +182,6 @@ Explicaciones visuales del algoritmo:
 - [https://www.youtube.com/watch?v=MZaf_9IZCrc](https://www.youtube.com/watch?v=MZaf_9IZCrc)
 - [https://www.youtube.com/watch?v=d0V6ibXxI5M](https://www.youtube.com/watch?v=d0V6ibXxI5M)
 
-## Instalación del entorno
-
-Para instalar y ejecutar este ejemplo seguí [estas instrucciones](https://github.com/pdep-utn/enunciados-miercoles-noche/blob/master/pages/haskell/entorno.md).
-
-El repo usa [PdePreludat](https://github.com/pdep-utn/pdepreludat), el preludio de la cátedra. Por eso los tipos numéricos aparecen como `Number` en lugar de `Int` o `Float`.
-
 ## Cómo correrlo
 
 Una vez clonado el repo, desde la carpeta raíz:

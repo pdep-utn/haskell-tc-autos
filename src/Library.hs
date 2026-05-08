@@ -61,8 +61,13 @@ tablaDePosiciones carreras = sortCorredores . map (\corredor -> (corredor, punto
 --
 puntosObtenidos :: Corredor -> [Carrera] -> Puntos
 puntosObtenidos corredor = foldr ((+) . puntosDeCorredor corredor) 0
--- puntosObtenidos corredor = foldl (\acum carrera -> acum + (findPuntos corredor) carrera) 0.0
+-- Alternativas con foldl
+-- puntosObtenidos corredor = foldl (\acum carrera -> acum + (puntosDeCorredor corredor) carrera) 0.0
 -- puntosObtenidos corredor = foldl (flip ((+) . puntosDeCorredor corredor)) 0
+
+-- alternativa con sumOf
+-- puntosObtenidos :: Corredor -> [Carrera] -> Puntos
+-- puntosObtenidos corredor  = sumOf (puntosDeCorredor corredor)
 
 corredor :: Posicion -> Corredor
 corredor = fst
@@ -104,25 +109,23 @@ safeHead (x:xs) = Just x
 -- o por ahí no te paso nada
 -- lo manejamos con pattern matching
 --
-puntosPorPosicion :: Maybe Posicion -> Number
+puntosPorPosicion :: Maybe Posicion -> Puntos
 puntosPorPosicion Nothing       = 0
 puntosPorPosicion (Just posicion) = puntos posicion
 
 -- *******************************************************************************************************
 -- Ordenamiento
 --
--- alternativa 1 - por burbujeo
--- explicación copada
--- https://www.youtube.com/watch?v=nmhjrI-aW5o
+-- alternativa 1 - por inserción
 --
--- sortCorredores :: [Posicion] -> [Posicion]
--- sortCorredores = foldl ordenarCorredor []
+sortCorredores :: [Posicion] -> [Posicion]
+sortCorredores = foldl ordenarCorredor []
 
--- ordenarCorredor :: [Posicion] -> Posicion -> [Posicion]
--- ordenarCorredor [] posicion = [posicion]
--- ordenarCorredor (posicion1:posiciones) posicion
---     | puntos posicion > puntos posicion1 = (posicion:posicion1:posiciones)
---     | otherwise                          = posicion1:ordenarCorredor posiciones posicion
+ordenarCorredor :: [Posicion] -> Posicion -> [Posicion]
+ordenarCorredor [] posicion = [posicion]
+ordenarCorredor (posicion1:posiciones) posicion
+    | puntos posicion > puntos posicion1 = (posicion:posicion1:posiciones)
+    | otherwise                          = posicion1:ordenarCorredor posiciones posicion
 
 
 -- alternativa 2
@@ -132,11 +135,11 @@ puntosPorPosicion (Just posicion) = puntos posicion
 -- https://www.youtube.com/watch?v=d0V6ibXxI5M
 -- 
 
-sortCorredores :: [Posicion] -> [Posicion]
-sortCorredores []     = []
-sortCorredores (corredor:corredores) = (sortCorredores lesser) ++ [corredor] ++ (sortCorredores greater)
-    where
-        lesser  = filter (\(_, puntosOtro) -> puntosActual < puntosOtro) corredores
-        greater = filter (\(_, puntosOtro) -> puntosActual >= puntosOtro) corredores
-        puntosActual = puntos corredor
+-- sortCorredores :: [Posicion] -> [Posicion]
+-- sortCorredores []     = []
+-- sortCorredores (corredor:corredores) = (sortCorredores conMasPuntos) ++ [corredor] ++ (sortCorredores conMenosPuntos)
+--     where
+--         conMasPuntos  = filter (\(_, puntosOtro) -> puntosActual < puntosOtro) corredores
+--         conMenosPuntos = filter (\(_, puntosOtro) -> puntosActual >= puntosOtro) corredores
+--         puntosActual = puntos corredor
 -- *******************************************************************************************************
